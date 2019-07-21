@@ -6,16 +6,16 @@ let liItems = "";
 
 
 
-function Students(name, surname, email, phone, age) {
+function Students(name, surname, phone, email, age) {
     this.name = name,
         this.surname = surname,
-        this.email = email,
         this.phone = phone,
+        this.email = email,
         this.age = age
 }
 
 function generateLiItems(value) {
-    liItems += `<li class = "list-group-item"> ${value.name} ${value.surname} ${value.email} ${value.phone} ${value.age} </li>`;
+    liItems += `<li class = "list-group-item"> ${value.name} ${value.surname} ${value.phone} ${value.email}  ${value.age} </li>`;
 
 }
 
@@ -24,23 +24,17 @@ function getInputValues(value) {
     let student = new Students(input[0].value, input[1].value, input[2].value, input[3].value, input[4].value);
 
     if (input[0].value && input[1].value && input[2].value && input[3].value && input[4].value) {
-        students.push(student);
-
-        students.forEach(generateLiItems);
-
-        document.getElementsByClassName("list-group")[0].innerHTML = liItems;
-
-        liItems = "";
-        input[0].value = "";
-        input[1].value = "";
-        input[2].value = "";
-        input[3].value = "";
-        input[4].value = "";
-        document.getElementsByClassName("forp")[0].innerHTML = ""
-        return;
+        if (isNaN(input[2].value)) {
+            document.getElementsByClassName("forp")[0].innerHTML = "Phone must be number!";
+        } else {
+            students.push(student);
+            students.forEach(generateLiItems);
+            reset();
+        }
     } else {
-        document.getElementsByClassName("forp")[0].innerHTML = "Butun xanalari doldurun";
+        document.getElementsByClassName("forp")[0].innerHTML = "Fill all cells!";
         return;
+
 
     }
 
@@ -135,6 +129,20 @@ function sortingAge(value) {
 
 function sortByAge(value) {
     students.sort(sortingAge());
+    students.forEach(generateLiItems);
+    reset()
+
+}
+
+function sortingRandom(value) {
+    let randomnum = Math.random();
+    return function(a, b) {
+        return randomnum;
+    }
+}
+
+function sortByRandom(value) {
+    students.sort(sortingRandom());
     students.forEach(generateLiItems);
     reset()
 
