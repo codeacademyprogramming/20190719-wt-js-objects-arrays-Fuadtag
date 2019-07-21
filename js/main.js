@@ -24,8 +24,8 @@ function getInputValues(value) {
     let student = new Students(input[0].value, input[1].value, input[2].value, input[3].value, input[4].value);
 
     if (input[0].value && input[1].value && input[2].value && input[3].value && input[4].value) {
-        if (isNaN(input[2].value)) {
-            document.getElementsByClassName("forp")[0].innerHTML = "Phone must be number!";
+        if (isNaN(input[4].value)) {
+            document.getElementsByClassName("forp")[0].innerHTML = "Age must be number!";
         } else {
             students.push(student);
             students.forEach(generateLiItems);
